@@ -2,6 +2,19 @@ specVersion: "3.1"
 metadata:
   name: ui5.walkthrough
 type: application
+framework:
+  name: SAPUI5
+  version: 1.108.0
+  libraries:
+    - name: sap.ui.core
+    - name: sap.m
+    - name: sap.f
+    - name: sap.ui.comp
+    - name: sap.ui.generic.app
+    - name: sap.ui.table
+    - name: sap.ushell
+    - name: themelib_sap_bluecrystal
+    - name: themelib_sap_horizon
 server:
   customMiddleware:
     - name: fiori-tools-proxy
@@ -12,11 +25,6 @@ server:
           - path: /sap
             url: ""
             destination: MANUAL_INPUT
-        ui5:
-          path:
-            - /resources
-            - /test-resources
-          url: https://ui5.sap.com
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:
