@@ -12,20 +12,6 @@ sap.ui.define(
       onInit() {
         console.log("App controller.js");
       },
-
-      onShowHello() {
-        const oResourceBundle = this.getView()
-          .getModel("i18n")
-          .getResourceBundle();
-
-        const sRecipientName = this.getView()
-          .getModel()
-          .getProperty("/recipient")?.name;
-
-        const sMsg = oResourceBundle.getText("helloMsg", [sRecipientName]);
-
-        MessageToast.show(sMsg);
-      },
     });
   }
 );
