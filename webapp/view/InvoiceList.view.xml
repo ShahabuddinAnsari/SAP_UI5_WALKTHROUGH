@@ -5,11 +5,27 @@
     controllerName="ui5.walkthrough.controller.InvoiceList"
 >
     <List
-        headerText="{i18n>invoiceListTitle}"
+        id="invoiceList"
         class="sapUiResponsiveMargin"
         width="auto"
-        items="{invoice>/Invoices}"
+        items="{
+            path: 'invoice>/Invoices',
+            sorter: {
+                path: 'ShipName',
+                group: true
+            }
+        }"
     >
+        <headerToolbar>
+            <Toolbar>
+                <Title text="{i18n>invoiceListTitle}" />
+                <ToolbarSpacer />
+                <SearchField
+                    width="50%"
+                    search=".onFilterInvoices"
+                />
+            </Toolbar>
+        </headerToolbar>
         <items>
             <ObjectListItem
                 core:require="{
@@ -28,7 +44,19 @@
                 }"
                 numberUnit="{view>/currency}"
                 numberState="{= ${invoice>ExtendedPrice} > 50 ? 'Error' : 'Success' }"
-            />
+            >
+                <firstStatus>
+                    <ObjectStatus
+                        core:require="{
+                            Formatter: 'ui5/walkthrough/model/formatter'
+                        }"
+                        text="{
+                            path: 'invoice>Status',
+                            formatter: 'Formatter.statusText.bind($controller)'
+                        }"
+                    />
+                </firstStatus>
+            </ObjectListItem>
         </items>
     </List>
 </mvc:View>

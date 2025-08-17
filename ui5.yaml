@@ -2,16 +2,17 @@ specVersion: "3.1"
 metadata:
   name: ui5.walkthrough
 type: application
+framework:
+  name: OpenUI5
+  version: "1.138.0"
+  libraries:
+    - name: sap.m
+    - name: sap.ui.core
+    - name: themelib_sap_horizon
 server:
   customMiddleware:
-    - name: fiori-tools-appreload
+    - name: ui5-middleware-simpleproxy
       afterMiddleware: compression
+      mountPath: /V2
       configuration:
-        port: 35729
-        path: webapp
-        delay: 300
-    - name: fiori-tools-preview
-      afterMiddleware: fiori-tools-appreload
-      configuration:
-        component: ui5.walkthrough
-        ui5Theme: sap_horizon
+        baseUri: "https://services.odata.org"
